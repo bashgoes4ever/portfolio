@@ -1,0 +1,134 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en"></html>
+<head>
+	<meta charset="UTF-8"/>
+	<title>{{ category_cur.index_title }}</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<link rel="stylesheet" href="{% static 'libs/bootstrap/bootstrap-grid-3.3.1.min.css' %}"/>
+	<link rel="stylesheet" href="{% static 'libs/font-awesome-4.7.0/css/font-awesome.min.css' %}"/>
+	<link href="{% static 'libs/owl-carousel/owl.carousel.css' %}" rel="stylesheet"/>
+	<link href="{% static 'css/fonts.css' %}" rel="stylesheet"/>
+	<link href="{% static 'css/normalize.css' %}" rel="stylesheet"/>
+	<link href="{% static 'libs/jquery-nice-select-1.1.0/css/nice-select.css' %}" rel="stylesheet"/>
+	<link href="{% static 'css/lightbox.css' %}" rel="stylesheet"/>
+	<link href="{% static 'css/main.css' %}" rel="stylesheet"/>
+	<link href="{% static 'css/media.css' %}" rel="stylesheet"/>
+</head>
+<body>
+	<header>
+		<div class="container">
+			<div class="head-flex">
+				<div class="head-left clearfix"><a href="/"><img src="{% static 'img/logo.png' %}"/></a>
+					<h2>Изделия для вашего интерьера<br>Подбор, изготовление, установка</h2>
+				</div>
+				<div class="head-right clearfix">
+					<button class="callback">Заказать звонок</button>
+					<p><span>Есть вопросы?<br></span>+7 (812) 213-21-22</p>
+				</div>
+			</div>
+		</div>
+		<nav>
+			<div class="container"><img src="{% static 'img/burger.png' %}" class="burger-menu xs-mob"/>
+				<ul>
+					<li><a id="a1" href="">Готовые изделия</a></li>
+					<li><a id="a2" href="">О компании</a></li>
+					<li><a id="a3" href="">Услуги</a></li>
+					<li><a id="a4" href="">Каталог</a></li>
+					<li><a id="a5" href="">Наше производство</a></li>
+					<li><a id="a6" href="">Отзывы</a></li>
+					<li><a id="a7" href="">Контакты</a></li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+	<section class="inner-main no-margin">
+		<div class="container">
+			<div class="inner-main__left">
+                <img src="/{{ category_cur.categoryinnerimg_set.first.img.url }}" class="inner-main__bg"/>
+				<h2>{{ category_cur.first_title|safe }}</h2>
+				<div class="line"></div>
+			</div>
+			<div class="inner-main__right">
+				<p>{{ category_cur.first_text|safe }}</p>
+			</div>
+		</div>
+	</section>
+	<section class="inner-content">
+		<div class="container">
+            {% for product in products %}
+                {% include 'site/catalog.html' %}
+            {% endfor %}
+		</div>
+	</section>
+	<section class="map">
+		<div class="map__block">
+			<div class="container map__container">
+				<div class="map__adress">
+					<h3>Адрес офиса:</h3>
+					<ul>
+						<li>ул. Магнитогорская дом 17-21, центр мебельных комплектующих "Макмарт"</li>
+					</ul><br/>
+					<h3>Адреса филиала:</h3>
+					<ul>
+						<li>ул. Химиков дом 26, центр мебельных комплектующих Прогресс М</li>
+					</ul><br/>
+					<h3>Адреса производства:</h3>
+					<ul>
+						<li>Глухоозерское шоссе дом 12, территория "Завода "Молодой Ударник"</li>
+					</ul><br/>
+					<p>Телефон: +7 (812) 426-92-93 (многоканальный)<br>Отдел приема заказов: нажмите 2 (добавочный 101)<br>Факс: нажмите 1 (добавочный 102)<br>Почта: zakaz-od@mail.ru	</p>
+				</div>
+			</div>
+			<div class="map__cont"><script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A661d9ea720de060c5ddb3d3b06d9dba747a322a33aa38e826c0fd1282ede1309&amp;width=100%25&amp;height=100%&amp;lang=ru_RU&amp;scroll=true"></script></div>
+		</div>
+	</section>
+	<footer>
+		<div class="container">
+			<div class="footer-flex">
+				<div class="clearfix footer-left"><img src="{% static 'img/logo.png' %}" class="logo"/>
+					<h4>Изделия для вашего интерьера<br>Подбор, изготовление, установка</h4>
+				</div>
+				<div class="clearfix footer-right">
+					<p class="hrefs"><a href=''>© «Омега-Дизайн» 2017</a> <a href=''>Политика конфиденциальности</a></p>
+					<p class="corp">Над структурой и дизайном работал <a href=''>Бояршинов Данил</a></p>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<div class="layer">
+		<div class="popup-min callback-popup"><img src="{% static 'img/cross.png' %}" class="close"/>
+			<h3>Заявка на обратный звонок</h3>
+			<div class="line"></div>
+			<p>Заполните поля ниже, и наш специалист свяжется с вами в течение 10 минут.</p>
+			<form>
+				<input type="text" placeholder="Введите имя" name="name" required="required"/>
+				<input type="text" placeholder="Введите телефон" name="phone" required="required"/>
+				<textarea name="text" placeholder="Ваши комментарии"></textarea>
+                <input type="hidden" name="type" value="Заявка на обратный звонок">
+				<button>Заказать звонок</button>
+                {% csrf_token %}
+			</form>
+		</div>
+		<div class="popup-min popup-price"><img src="{% static 'img/cross.png' %}" class="close"/>
+			<h3>Узнать стоимость</h3>
+			<div class="line"></div>
+			<p>Заполните поля ниже, и мы отправим вам стоимость изделий по смс.</p>
+			<form>
+				<input type="text" placeholder="Введите имя" name="name" required="required"/>
+				<input type="text" placeholder="Введите телефон" name="phone" required="required"/>
+				<input type="hidden" name="type"/>
+				<button>Узнать стоимость</button>
+                {% csrf_token %}
+			</form>
+		</div>
+	</div>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script src="{% static 'libs/scrollto/jquery.scrollTo.min.js' %}"></script>
+	<script src="{% static 'libs/owl-carousel/owl.carousel.js' %}"></script>
+	<script src="{% static 'libs/jquery-nice-select-1.1.0/js/jquery.nice-select.min.js' %}"></script>
+	<script src="{% static 'js/lightbox.js' %}"></script>
+	<script src="{% static 'js/mask.js' %}"></script>
+	<script src="{% static 'js/main.js' %}"></script>
+	<script src="{% static 'js/content.js' %}"></script>
+</body>

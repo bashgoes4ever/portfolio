@@ -1,0 +1,68 @@
+
+    {% if product.type == '1' %}
+    <div class="inner-item-detail" data-item="{% if i %}{{ i }}{% else %}{{ forloop.counter0 }}{% endif %}">
+        <div class="inner-item__top clearfix">
+            <h4>Проект был изготовлен: <span>{{ product.date }}</span></h4>
+            <button data-type="Стоимость {{ product.title }}" class="get-price">Узнать стоимость</button>
+        </div>
+        <div class="inner-item-wrapper clearfix">
+            <div class="inner-item__images inner-images-type1 clearfix">
+                {% for img in product.productimg_set.all %}
+                <div class="inner-image__wrap">
+                    <a href="/{{ img.img.url }}" data-lightbox="{{ product.id }}">
+                        <img src="/{{ img.img.url }}" alt=""/>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="inner-item__text inner-text-type1">
+                <h5>{{ product.title }}</h5>
+                <p>{{ product.text|safe }}</p>
+            </div>
+        </div>
+    </div>
+    {% elif product.type == '2' %}
+    <div class="inner-item-detail" data-item="{% if i %}{{ i }}{% else %}{{ forloop.counter0 }}{% endif %}">
+        <div class="inner-item__top clearfix">
+            <h4>Проект был изготовлен: <span>{{ product.date }}</span></h4>
+            <button data-type="Стоимость {{ product.title }}" class="get-price undertitle">Узнать стоимость</button>
+        </div>
+        <div class="inner-item-wrapper clearfix">
+            <div class="inner-item__images inner-images-type2 clearfix">
+                {% for img in product.productimg_set.all %}
+                <div class="inner-image__wrap">
+                    <a href="/{{ img.img.url }}" data-lightbox="{{ product.id }}">
+                        <img src="/{{ img.img.url }}" alt=""/>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="inner-item__text inner-text-type2">
+                <h5>{{ product.title }}</h5>
+                <p>{{ product.text|safe }}</p>
+            </div>
+        </div>
+    </div>
+    {% elif product.type == '3' %}
+    <div class="inner-item-detail" data-item="{% if i %}{{ i }}{% else %}{{ forloop.counter0 }}{% endif %}">
+        <div class="inner-item__top clearfix">
+            <h4>Проект был изготовлен: <span>{{ product.date }}</span></h4>
+            <button data-type="Стоимость {{ product.title }}" class="get-price undertitle">Узнать стоимость</button>
+        </div>
+        <div class="inner-item-wrapper clearfix">
+            <div class="inner-item__images inner-images-type3 clearfix">
+                {% for img in product.productimg_set.all %}
+                <div class="inner-image__wrap{% if img.type == '2' %} inner-image-right{% endif %}{% if img.type == '1' %} inner-image-left{% endif %}">
+                    <a href="/{{ img.img.url }}" data-lightbox="{{ product.id }}">
+                        <img src="/{{ img.img.url }}" alt=""/>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="inner-item__text inner-text-type2">
+                <h5>{{ product.title }}</h5>
+                <p>{{ product.text|safe }}</p>
+            </div>
+        </div>
+    </div>
+    {% endif %}
